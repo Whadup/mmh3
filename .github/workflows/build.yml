@@ -1,10 +1,14 @@
 name: build
 
-on: [push]
+on:
+  workflow_run:
+  workflows: ["Super-Linter"]
+  types:
+    - completed
+
 
 jobs:
   build:
-    needs: super-lint
     runs-on: ubuntu-latest
 
     strategy:
