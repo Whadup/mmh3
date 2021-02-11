@@ -3,12 +3,7 @@ name: build
 on: push
 
 jobs:
-  setup-for-win:
-    runs-on: windows-2019
-    steps:
-    - run: choco install vcpython27
-  main:
-    needs: setup-for-win
+  build:
     strategy:
       matrix:
         os: [macos-10.15, windows-2019, ubuntu-16.04, ubuntu-latest]
@@ -21,6 +16,10 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: setup for Python 2.7 on Windows
+      if: matrix.os == 'windows-2019' && matrix.python-version == '2.7'
+      run: |
+        choco install vcpython27
     - name: Install dependencies
       run: |
         pip install pytest
