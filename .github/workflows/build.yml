@@ -2,9 +2,9 @@ name: build
 
 on:
   workflow_run:
-  workflows: ["Super-Linter"]
-  types:
-    - completed
+    workflows: ["Super-Linter"]
+    types:
+      - completed
 
 
 jobs:
