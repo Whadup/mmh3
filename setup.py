@@ -1,10 +1,11 @@
 # MurmurHash3 was written by Austin Appleby, and is placed in the public domain.
 # mmh3 Python module was written by Hajime Senuma, and is also placed in the public domain.
 # The authors hereby disclaim copyright to these source codes.
-import sys
-import platform
-from setuptools import setup, Extension
 import distutils.util
+import platform
+import sys
+
+from setuptools import setup, Extension
 
 COMPILE_OPTIONS = []
 LINK_OPTIONS = []
@@ -12,7 +13,6 @@ LINK_OPTIONS = []
 
 def is_new_osx():
     """Check whether we're on OSX >= 10.7"""
-    name = distutils.util.get_platform()
     if sys.platform != "darwin":
         return False
     mac_ver = platform.mac_ver()[0]

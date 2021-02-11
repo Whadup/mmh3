@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
-import mmh3
+
 import numpy as np
+
+import mmh3
+
 
 # see also https://stackoverflow.com/a/1375939
 def u32_to_s32(v):
