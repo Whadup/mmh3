@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
 
-import numpy as np
-
 import mmh3
+import numpy as np
 
 
 # see also https://stackoverflow.com/a/1375939
