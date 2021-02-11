@@ -6,7 +6,7 @@ jobs:
   setup-for-win:
     runs-on: windows-2019
     steps:
-      -run: choco install vcpython27
+    - run: choco install vcpython27
   main:
     needs: setup-for-win
     strategy:
