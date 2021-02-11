@@ -1,17 +1,10 @@
 name: build
 
-on:
-  workflow_run:
-    workflows:
-      - Super-Linter
-    types:
-      - completed
-
+on: push
 
 jobs:
   main:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
