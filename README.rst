@@ -7,8 +7,10 @@ mmh3
 .. image:: https://ci.appveyor.com/api/projects/status/github/hajimes/mmh3?branch=master&svg=true
    :target: https://ci.appveyor.com/project/hajimes/mmh3
 
-.. image:: https://github.com/hajimes/mmh3/workflows/Super-Linter/badge.svg
-   :target: https://github.com/marketplace/actions/super-linter?branch=feature/ghactions
+.. image:: https://github.com/hajimes/mmh3/workflows/Super-Linter/badge.svg?branch=feature/ghactions
+   :target: https://github.com/marketplace/actions/super-linter
+
+.. image:: https://github.com/hajimes/mmh3/workflows/build/badge.svg?branch=feature/ghactions
 
 Python wrapper for MurmurHash (MurmurHash3), a set of fast and robust hash functions.
 
