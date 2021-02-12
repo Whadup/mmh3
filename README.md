@@ -142,8 +142,8 @@ The results of hash64 and hash_bytes remain unchanged. Austin Appleby, the autho
 
 [CC0-1.0](./LICENSE).
 
-## Issues
-### Different results from other MurmurHash3-based libraries
+## Known Issues
+### Getting different results from other MurmurHash3-based libraries
 
 By default, mmh3 returns **signed** values for 32-bit and 64-bit versions and **unsigned** values for `hash128`, due to historical reasons. Please use the keyword argument `signed` to obtain a desired result.
 
