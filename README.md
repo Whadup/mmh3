@@ -1,8 +1,8 @@
 # mmh3
 [![GitHub Super-Linter](https://github.com/hajimes/mmh3/workflows/Super-Linter/badge.svg?branch=feature/ghactions)](https://github.com/hajimes/mmh3/actions?query=workflow%3ASuper-Linter+branch%3Amaster)
 [![Build passing](https://github.com/hajimes/mmh3/workflows/build/badge.svg?branch=feature/ghactions)](https://github.com/hajimes/mmh3/actions?query=workflow%3Abuild+branch%3Amaster)
-[![Current Release Version](https://img.shields.io/github/release/hajimes/mmh3.svg?style=flat-square&logo=github)](https://github.com/hajimes/mmh3/releases)
 [![PyPi Version](https://img.shields.io/pypi/v/mmh3.svg?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/mmh3/)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/mmh3.svg?style=flat-square&logo=conda-forge&logoColor=white)](https://anaconda.org/conda-forge/mmh3)
 [![Total Downloads](https://pepy.tech/badge/mmh3)](https://pepy.tech/project/mmh3)
 [![Recent Downloads](https://pepy.tech/badge/mmh3/month)](https://pepy.tech/project/mmh3)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
@@ -89,7 +89,7 @@ Be careful so that these seeds do not exceed 32-bit. Unexpected results may happ
 
 ## Changelog
 ### 2.6 (2021-02-12)
-* Bug fix for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
+* Add support for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
 * Drop support for Python 3.3 and 3.4. Add support for Python 3.7, 3.8 and 3.9.
 * Migrate Travis CI and AppVeyor to GitHub Actions.
 
