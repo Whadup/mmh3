@@ -47,7 +47,7 @@ setup(
     url="http://packages.python.org/mmh3",
     ext_modules=[mmh3module],
     keywords="utility hash MurmurHash",
-    long_description=open("README.rst").read(),
+    long_description=open("README.md").read(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
