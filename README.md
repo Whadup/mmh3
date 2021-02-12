@@ -1,8 +1,9 @@
 # mmh3
 [![GitHub Super-Linter](https://github.com/hajimes/mmh3/workflows/Super-Linter/badge.svg?branch=feature/ghactions)](https://github.com/hajimes/mmh3/actions?query=workflow%3ASuper-Linter+branch%3Amaster)
-[![PyPi Version](https://img.shields.io/pypi/v/mmh3.svg?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/mmh3/)
 [![Build passing](https://github.com/hajimes/mmh3/workflows/build/badge.svg?branch=feature/ghactions)](https://github.com/hajimes/mmh3/actions?query=workflow%3Abuild+branch%3Amaster)
+[![PyPi Version](https://img.shields.io/pypi/v/mmh3.svg?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/mmh3/)
 [![PyPi downloads](https://static.pepy.tech/personalized-badge/mmh3?period=total&units=international_system&left_color=grey&right_color=orange&left_text=pip%20downloads)](https://pypi.org/project/mmh3/)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
 Python wrapper for MurmurHash (MurmurHash3), a set of fast and robust hash functions.
 
@@ -11,7 +12,7 @@ mmh3 2.6 supports Python 2.7, Python 3.5 and higher.
 ## How to use
 
 Quickstart:
-```
+```shell
 >>> import mmh3
 >>> mmh3.hash('foo') # 32 bit signed int
 -156908512
@@ -22,7 +23,7 @@ Quickstart:
 ```
 
 Other functions:
-```
+```shell
 >>> mmh3.hash64('foo') # two 64 bit signed ints (by using the 128-bit algorithm as its backend)
 (-2129773440516405919, 9128664383759220103)
 >>> mmh3.hash64('foo',signed =False) #  two 64 bit unsigned ints
@@ -37,14 +38,14 @@ Other functions:
 
 `hash64`, `hash128`, and `hash_bytes` have the third argument for architecture optimization. Use True for x64 and False for x86 (default: True).:
 
-```
+```shell
 >>> mmh3.hash64('foo', 42, True) 
 (-840311307571801102, -6739155424061121879)
 ```
 
 Version 2.5 added `hash_from_buffer`, which hashes byte-likes without memory copying. The method is suitable when you hash a large memory-view such as `numpy.ndarray`.
 
-```
+```shell
 >>> mmh3.hash_from_buffer(numpy.random.rand(100))
 -2137204694
 >>> mmh3.hash_from_buffer(numpy.random.rand(100), signed = False)
@@ -55,7 +56,7 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 
 Version 2.4 added support for 64-bit data.
 
-```
+```shell
 >>> import numpy as np
 >>> a = np.zeros(2**32, dtype=np.int8)
 >>> mmh3.hash_bytes(a)
@@ -64,7 +65,7 @@ b'V\x8f}\xad\x8eNM\xa84\x07FU\x9c\xc4\xcc\x8e'
 
 Version 2.4 also changed the type of seeds from signed 32-bit int to unsigned 32-bit int. (**The resulting values with signed seeds still remain the same as before, as long as they are 32-bit**)
 
-```
+```shell
 >>> mmh3.hash('aaaa', -1756908916) # signed rep. for 0x9747b28c
 1519878282
 >>> mmh3.hash('aaaa', 2538058380) # unsigned rep. for 0x9747b28c
@@ -73,7 +74,7 @@ Version 2.4 also changed the type of seeds from signed 32-bit int to unsigned 32
 
 Be careful so that these seeds do not exceed 32-bit. Unexpected results may happen with invalid values.
 
-```
+```shell
 >>> mmh3.hash('foo', 2 ** 33)
 -156908512
 >>> mmh3.hash('foo', 2 ** 34)
@@ -120,12 +121,14 @@ The first two commits are from [Derek Wilson](https://github.com/underrun). Than
 * Add `__version__` constant. Check if it exists when the following revision matters for your application.
 * Incorporate the revision r147, which includes robustness improvement and minor tweaks.
 
-Beware that due to this revision, **the result of 32-bit version of 2.1 is NOT the same as that of 2.0**. E.g.,::
+Beware that due to this revision, **the result of 32-bit version of 2.1 is NOT the same as that of 2.0**. E.g.,:
 
-    >>> mmh3.hash('foo') # in mmh3 2.0
-    -292180858
-    >>> mmh3.hash('foo') # in mmh3 2.1
-    -156908512
+```shell
+>>> mmh3.hash('foo') # in mmh3 2.0
+-292180858
+>>> mmh3.hash('foo') # in mmh3 2.1
+-156908512
+```
 
 The results of hash64 and hash_bytes remain unchanged. Austin Appleby, the author of Murmurhash, ensured this revision was the final modification to MurmurHash3's results and any future changes would be to improve performance only.
 
@@ -143,26 +146,26 @@ The following textbooks and tutorials are great sources to learn how to use mmh3
 * Duke University. [Efficient storage of data in memeory](http://people.duke.edu/~ccc14/sta-663-2016/20B_Big_Data_Structures.html).
 * Max Burstein. [Creating a Simple Bloom Filter](http://www.maxburstein.com/blog/creating-a-simple-bloom-filter/).
 
-### Some results are different from other MurmurHash3-based libraries.
+### Some results are different from other MurmurHash3-based libraries
 
 By default, mmh3 returns **signed** values for 32-bit and 64-bit versions and **unsigned** values for `hash128`, due to historical reasons. Please use the keyword argument `signed` to obtain a desired result.
 
-For compatibility with Google Guava (Java), see https://stackoverflow.com/questions/29932956/murmur3-hash-different-result-between-python-and-java-implementation
+For compatibility with Google Guava (Java), see <https://stackoverflow.com/questions/29932956/murmur3-hash-different-result-between-python-and-java-implementation>
 
 ## Authors
 
 MurmurHash3 was originally developed by Austin Appleby and distributed under public domain.
 
-* http://code.google.com/p/smhasher/
+* <http://code.google.com/p/smhasher/>
 
 Ported and modified for Python by Hajime Senuma.
 
-* http://pypi.python.org/pypi/mmh3
-* http://github.com/hajimes/mmh3
+* <http://pypi.python.org/pypi/mmh3>
+* <http://github.com/hajimes/mmh3>
 
 ## See also
 
-* https://github.com/wc-duck/pymmh3: mmh3 in pure python (Fredrik Kihlander and Swapnil Gusani)
-* https://github.com/escherba/python-cityhash: Python bindings for CityHash (Eugene Scherba)
-* https://github.com/veelion/python-farmhash: Python bindigs for FarmHash (Veelion Chong)
-* https://github.com/escherba/python-metrohash: Python bindings for MetroHash (Eugene Scherba)
+* <https://github.com/wc-duck/pymmh3>: mmh3 in pure python (Fredrik Kihlander and Swapnil Gusani)
+* <https://github.com/escherba/python-cityhash>: Python bindings for CityHash (Eugene Scherba)
+* <https://github.com/veelion/python-farmhash>: Python bindigs for FarmHash (Veelion Chong)
+* <https://github.com/escherba/python-metrohash>: Python bindings for MetroHash (Eugene Scherba)
