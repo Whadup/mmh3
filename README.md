@@ -142,17 +142,8 @@ The results of hash64 and hash_bytes remain unchanged. Austin Appleby, the autho
 
 [CC0-1.0](./LICENSE).
 
-## FAQ
-
-### How can I use this module? Any tutorials?
-
-The following textbooks and tutorials are great sources to learn how to use mmh3 (and other hash algorithms in general) for high-performance computing.
-
-* Chapter 11: Using Less Ram in Micha Gorelick and Ian Ozsvald. 2014. *High Performance Python: Practical Performant Programming for Humans*. O'Reilly Media. [ISBN: 978-1-4493-6159-4](https://www.amazon.com/dp/1449361595).
-* Duke University. [Efficient storage of data in memeory](http://people.duke.edu/~ccc14/sta-663-2016/20B_Big_Data_Structures.html).
-* Max Burstein. [Creating a Simple Bloom Filter](http://www.maxburstein.com/blog/creating-a-simple-bloom-filter/).
-
-### Some results are different from other MurmurHash3-based libraries
+## Issues
+### Different results from other MurmurHash3-based libraries
 
 By default, mmh3 returns **signed** values for 32-bit and 64-bit versions and **unsigned** values for `hash128`, due to historical reasons. Please use the keyword argument `signed` to obtain a desired result.
 
@@ -170,7 +161,17 @@ Ported and modified for Python by Hajime Senuma.
 * <http://github.com/hajimes/mmh3>
 
 ## See also
+###  Tutorials
 
+The following textbooks and tutorials are great sources to learn how to use mmh3 (and other hash algorithms in general) for high-performance computing.
+
+* Chapter 11: Using Less Ram in Micha Gorelick and Ian Ozsvald. 2014. *High Performance Python: Practical Performant Programming for Humans*. O'Reilly Media. [ISBN: 978-1-4493-6159-4](https://www.amazon.com/dp/1449361595).
+* Duke University. [Efficient storage of data in memeory](http://people.duke.edu/~ccc14/sta-663-2016/20B_Big_Data_Structures.html).
+* Max Burstein. [Creating a Simple Bloom Filter](http://www.maxburstein.com/blog/creating-a-simple-bloom-filter/).
+
+
+
+### Similar libraries
 * <https://github.com/wc-duck/pymmh3>: mmh3 in pure python (Fredrik Kihlander and Swapnil Gusani)
 * <https://github.com/escherba/python-cityhash>: Python bindings for CityHash (Eugene Scherba)
 * <https://github.com/veelion/python-farmhash>: Python bindigs for FarmHash (Veelion Chong)
