@@ -1,6 +1,9 @@
 name: Upload Python Package
 
 on:
+  push:
+    branches:
+      - feature/wheel
   workflow_dispatch:
     inputs:
       repository: 
@@ -10,9 +13,7 @@ on:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
@@ -29,4 +30,4 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         python setup.py sdist bdist_wheel
-        twine upload  --repository ${{ github.event.inputs.repository }} dist/*
+        twine upload  --repository testpypi dist/*
