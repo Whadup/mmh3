@@ -16,6 +16,7 @@ function repair_wheel {
 
 # Compile wheels
 for PYBIN in /opt/python/*/bin; do
+    "${PYBIN}/pip" install numpy
     "${PYBIN}/pip" install pytest
     "${PYBIN}/pip" wheel /io/ --no-deps -w wheelhouse/
 done
