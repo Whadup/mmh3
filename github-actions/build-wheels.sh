@@ -17,7 +17,7 @@ function repair_wheel {
 }
 
 # Compile wheels
-for PYBIN in ${supported_python_versions[@]}; do
+for PYBIN in "${supported_python_versions[@]}"; do
     "/opt/python/${PYBIN}/bin/pip" wheel /io/ --no-deps -w wheelhouse/
 done
 
@@ -27,7 +27,7 @@ for whl in wheelhouse/*.whl; do
 done
 
 # Install packages and test
-for PYBIN in ${supported_python_versions[@]}; do
+for PYBIN in "${supported_python_versions[@]}"; do
     "/opt/python/${PYBIN}/bin/pip" install numpy
     "/opt/python/${PYBIN}/bin/pip" install pytest
     "/opt/python/${PYBIN}/bin/pip" install mmh3 --no-index -f /io/wheelhouse
