@@ -20,5 +20,14 @@ jobs:
         PLAT: manylinux1_x86_64
       options: -v ${{ github.workspace }}:/io --rm
     steps:
-      - run: |
+      - name: Run docker
+        run: |
           echo test docker job
+          ls /io
+          ls /opt/python
+          mkdir /io/foo
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-foo
+          path: foo
