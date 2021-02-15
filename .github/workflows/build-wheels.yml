@@ -15,12 +15,22 @@ jobs:
   deploy:
     strategy:
       matrix:
-        docker-image: [manylinux1_x86_64, manylinux_2_24_x86_64, manylinux_2_24_i686, manylinux_2_24_aarch64, manylinux_2_24_ppc64le, manylinux_2_24_s390x]
+        include:
+          - policy: "manylinux1"
+            platform: "x86_64"
+          - policy: "manylinux_2_24"
+            platform: "ppc64le"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        if: matrix.platform == 'ppc64le'
+        uses: docker/setup-qemu-action@v1.0.1
+        with:
+          platforms: ppc64le
       - name: Run docker
         run: |
-          docker pull quay.io/pypa/${{ matrix.docker-image }}
-          docker run --rm -e PLAT=${{ matrix.docker-image }} -v ${{ github.workspace }}:/io quay.io/pypa/${{ matrix.docker-image }} /io/github-actions/build-wheels.sh
+          docker pull quay.io/pypa/${{ matrix.policy }}_${{ matrix.platform }}
+          docker run --rm -e PLAT=${{ matrix.policy }}_${{ matrix.platform }} -v ${{ github.workspace }}:/io quay.io/pypa/${{ matrix.policy }}_${{ matrix.platform }} /io/github-actions/build-wheels.sh
           ls wheelhouse/
