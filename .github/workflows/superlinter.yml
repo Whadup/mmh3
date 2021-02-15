@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - feature/wheel
   pull_request:
     types:
       - opened

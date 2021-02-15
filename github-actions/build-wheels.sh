@@ -5,6 +5,8 @@ set -e -u -x
 # Originally written by Robert T. McGibbon and published under Public Domain
 # Modified by Hajime Senuma
 
+supported_python_versions=(cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39)
+
 function repair_wheel {
     wheel="$1"
     if ! auditwheel show "$wheel"; then
@@ -15,10 +17,8 @@ function repair_wheel {
 }
 
 # Compile wheels
-for PYBIN in /opt/python/*/bin; do
-    "${PYBIN}/pip" install numpy
-    "${PYBIN}/pip" install pytest
-    "${PYBIN}/pip" wheel /io/ --no-deps -w wheelhouse/
+for PYBIN in ${supported_python_versions[@]}; do
+    "/opt/python/${PYBIN}/bin/pip" wheel /io/ --no-deps -w wheelhouse/
 done
 
 # Bundle external shared libraries into the wheels
@@ -27,7 +27,9 @@ for whl in wheelhouse/*.whl; do
 done
 
 # Install packages and test
-for PYBIN in /opt/python/*/bin/; do
-    "${PYBIN}/pip" install mmh3 --no-index -f /io/wheelhouse
-    (cd "/io"; "${PYBIN}/python" -m pytest)
+for PYBIN in ${supported_python_versions[@]}; do
+    "/opt/python/${PYBIN}/bin/pip" install numpy
+    "/opt/python/${PYBIN}/bin/pip" install pytest
+    "/opt/python/${PYBIN}/bin/pip" install mmh3 --no-index -f /io/wheelhouse
+    (cd "/io"; "/opt/python/${PYBIN}/bin/python" -m pytest)
 done

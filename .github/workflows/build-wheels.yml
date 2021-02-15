@@ -13,11 +13,14 @@ on:
 
 jobs:
   deploy:
+    strategy:
+      matrix:
+        docker-image: [manylinux1_x86_64, manylinux2014_s390x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run docker
         run: |
-          docker pull quay.io/pypa/manylinux1_x86_64
-          docker run --rm -e PLAT=manylinux1_x86_64 -v ${{ github.workspace }}:/io quay.io/pypa/manylinux1_x86_64 /io/github-actions/build-wheels.sh
+          docker pull quay.io/pypa/${{ matrix.docker-image }}
+          docker run --rm -e PLAT=${{ matrix.docker-image }} -v ${{ github.workspace }}:/io quay.io/pypa/${{ matrix.docker-image }} /io/github-actions/build-wheels.sh
           ls wheelhouse/
