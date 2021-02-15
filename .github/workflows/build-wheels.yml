@@ -1,0 +1,26 @@
+name: Build Python Wheels for Manylinux
+
+on:
+  push:
+    branches:
+      - feature/wheel
+  workflow_dispatch:
+    inputs:
+      repository: 
+        description: 'The repository to upload the package to'
+        required: true
+        default: 'testpypi'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/pypa/manylinux1_x86_64
+      env:
+        PLAT: manylinux1_x86_64
+      volumes: `pwd`:/io
+      options:
+        - rm
+      steps:
+        - run: |
+            echo test docker job
