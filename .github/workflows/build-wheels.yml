@@ -15,7 +15,7 @@ jobs:
   deploy:
     strategy:
       matrix:
-        docker-image: [manylinux1_x86_64, manylinux_2_24_x86_64]
+        docker-image: [manylinux1_x86_64, manylinux_2_24_x86_64, manylinux_2_24_i686, manylinux_2_24_aarch64, manylinux_2_24_ppc64le, manylinux_2_24_s390x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
