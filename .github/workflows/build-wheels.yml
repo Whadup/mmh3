@@ -18,7 +18,7 @@ jobs:
       image: quay.io/pypa/manylinux1_x86_64
       env:
         PLAT: manylinux1_x86_64
-      volumes: `pwd`:/io
+      volumes: $(pwd):/io
       options:
         - rm
       steps:
