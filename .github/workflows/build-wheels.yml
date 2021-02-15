@@ -18,7 +18,6 @@ jobs:
       image: quay.io/pypa/manylinux1_x86_64
       env:
         PLAT: manylinux1_x86_64
-      volumes: $GITHUB_WORKSPACE:/io
       options: -v ${{ github.workspace }}:/io -rm
     steps:
       - run: |
