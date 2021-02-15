@@ -18,7 +18,7 @@ jobs:
       image: quay.io/pypa/manylinux1_x86_64
       env:
         PLAT: manylinux1_x86_64
-      options: -v ${{ github.workspace }}:/io -rm
+      options: -v ${{ github.workspace }}:/io --rm
     steps:
       - run: |
           echo test docker job
