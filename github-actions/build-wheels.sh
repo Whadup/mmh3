@@ -3,6 +3,7 @@ set -e -u -x
 
 # From https://github.com/pypa/python-manylinux-demo
 # Originally written by Robert T. McGibbon and published under Public Domain
+# Modified by Hajime Senuma
 
 function repair_wheel {
     wheel="$1"
@@ -13,12 +14,9 @@ function repair_wheel {
     fi
 }
 
-# Install a system package required by our library
-yum install -y atlas-devel
-
 # Compile wheels
 for PYBIN in /opt/python/*/bin; do
-    "${PYBIN}/pip" install -r /io/dev-requirements.txt
+    "${PYBIN}/pip" install pytest
     "${PYBIN}/pip" wheel /io/ --no-deps -w wheelhouse/
 done
 
@@ -29,6 +27,6 @@ done
 
 # Install packages and test
 for PYBIN in /opt/python/*/bin/; do
-    "${PYBIN}/pip" install python-manylinux-demo --no-index -f /io/wheelhouse
-    (cd "$HOME"; "${PYBIN}/nosetests" pymanylinuxdemo)
+    "${PYBIN}/pip" install mmh3 --no-index -f /io/wheelhouse
+    (cd "/io"; "${PYBIN}/python" -m pytest)
 done
