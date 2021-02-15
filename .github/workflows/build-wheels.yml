@@ -21,6 +21,6 @@ jobs:
       volumes: $(pwd):/io
       options:
         - rm
-      steps:
-        - run: |
-            echo test docker job
+    steps:
+      - run: |
+          echo test docker job
