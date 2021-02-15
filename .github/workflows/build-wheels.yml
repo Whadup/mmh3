@@ -14,20 +14,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    container:
-      image: quay.io/pypa/manylinux1_x86_64
-      env:
-        PLAT: manylinux1_x86_64
-      options: -v ${{ github.workspace }}:/io --rm
     steps:
+      - uses: actions/checkout@v2
       - name: Run docker
         run: |
-          echo test docker job
-          ls /io
-          ls /opt/python
-          mkdir /io/foo
-      - name: Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-foo
-          path: foo
+          ls ${{ github.workspace }}
+          docker pull quay.io/pypa/manylinux1_x86_64
+          docker run --rm -e PLAT=manylinux1_x86_64 -v ${{ github.workspace }}:/io quay.io/pypa/manylinux1_x86_64 /io/travis/build-wheels.sh
+          ls wheelhouse/
