@@ -10,7 +10,7 @@
 
 Python wrapper for MurmurHash (MurmurHash3), a set of fast and robust hash functions.
 
-mmh3 2.6.0 supports Python 3.6 and higher.
+mmh3 2.6.0 supports Python 3.6 and higher. [Manylinux wheels are available](https://pypi.org/project/mmh3/2.6.0/#files) for the same policy/platform combinations as those [NumPy 1.19.5 provide](https://pypi.org/project/numpy/1.19.5/#files).
 
 ## How to use
 Install:
@@ -94,6 +94,7 @@ Be careful so that these seeds do not exceed 32-bit. Unexpected results may happ
 * Drop support for Python 2.7, 3.3, 3.4, and 3.5.
 * Add support for Python 3.7, 3.8, and 3.9.
 * Migrate Travis CI and AppVeyor to GitHub Actions.
+* Provide 
 
 ### 2.5.1 (2017-10-31)
 * Bug fix for `hash_bytes`. Thanks [doozr](https://github.com/doozr)!
