@@ -1,9 +1,9 @@
 name: Build Python Wheels for Manylinux
 
 on:
-  push:
-    branches:
-      - feature/wheel
+#  push:
+#    branches:
+#      - feature/wheel
   workflow_dispatch:
     inputs:
       repository: 
@@ -17,6 +17,8 @@ jobs:
       matrix:
         include:
           - policy: "manylinux1"
+            platform: "x86_64"
+          - policy: "manylinux10"
             platform: "x86_64"
           - policy: "manylinux2014"
             platform: "aarch64"

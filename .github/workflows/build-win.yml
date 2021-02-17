@@ -3,21 +3,14 @@ name: build
 on:
   push:
     branches:
-      - develop
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+      - feature/wheel
 
 jobs:
   build:
     strategy:
       matrix:
-        os: [macos-10.15, windows-2019, ubuntu-latest]
         python-version: [3.6, 3.7, 3.8, 3.9]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -31,3 +24,5 @@ jobs:
         pip install .
     - name: Test with pytest
       run: python -m pytest
+    - name: Build wheels
+      run: python setup.py bdist_wheel

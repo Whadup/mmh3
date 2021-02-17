@@ -8,9 +8,9 @@
 [![Recent Downloads](https://pepy.tech/badge/mmh3/month)](https://pepy.tech/project/mmh3)
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mmh3.svg?style=flat-square&logo=conda-forge&logoColor=white)](https://anaconda.org/conda-forge/mmh3)
 
-Python wrapper for MurmurHash (MurmurHash3), a set of fast and robust hash functions.
+Python wrapper for MurmurHash (MurmurHash3), a set of fast and robust non-cryptographic hash functions.
 
-mmh3 2.6.0 supports Python 3.6 and higher. [Manylinux wheels are available](https://pypi.org/project/mmh3/2.6.0/#files) for the same policy/platform combinations as those [NumPy 1.19.5 provide](https://pypi.org/project/numpy/1.19.5/#files).
+mmh3 3.0.0 supports Python 3.6 and higher. [Manylinux wheels are available](https://pypi.org/project/mmh3/2.6.0/#files) for the same policy/platform combinations as those [NumPy 1.19.5 provide](https://pypi.org/project/numpy/1.19.5/#files).
 
 ## How to use
 Install:
@@ -89,12 +89,12 @@ Be careful so that these seeds do not exceed 32-bit. Unexpected results may happ
 ```
 
 ## Changelog
-### 2.6.0 (2021-02-15)
+### 3.0.0 (2021-02-17)
+* Python wheels are now available!
 * Add support for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
 * Drop support for Python 2.7, 3.3, 3.4, and 3.5.
 * Add support for Python 3.7, 3.8, and 3.9.
 * Migrate Travis CI and AppVeyor to GitHub Actions.
-* Provide 
 
 ### 2.5.1 (2017-10-31)
 * Bug fix for `hash_bytes`. Thanks [doozr](https://github.com/doozr)!

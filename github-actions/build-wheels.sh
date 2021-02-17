@@ -28,7 +28,7 @@ done
 
 # Install packages and test
 for PYBIN in "${supported_python_versions[@]}"; do
-    "/opt/python/${PYBIN}/bin/pip" install numpy
+    "/opt/python/${PYBIN}/bin/pip" install numpy=1.19.5
     "/opt/python/${PYBIN}/bin/pip" install pytest
     "/opt/python/${PYBIN}/bin/pip" install mmh3 --no-index -f /io/wheelhouse
     (cd "/io"; "/opt/python/${PYBIN}/bin/python" -m pytest)
