@@ -22,17 +22,15 @@ jobs:
         if: runner.os == 'Linux'
         uses: docker/setup-qemu-action@v1.0.1
         with:
-#          platforms: arm64
-          platforms: all
+          platforms: arm64
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.9.0
         with:
           output-dir: wheelhouse
         env:
-#          CIBW_BUILD: '{cp36,cp39}-{manylinux1_x86_64,manylinux10_x86_64,manylinux2014_aarch64,win32,win_amd64,macosx_x86_64} cp39-macosx_arm64'
-          CIBW_BUILD: 'cp39-manylinux_ppc64le'
+          CIBW_BUILD: '{cp36,cp39}-{manylinux_x86_64,manylinux_aarch64,win32,win_amd64,macosx_x86_64} cp39-macosx_arm64'
           CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
-          CIBW_ARCHS_LINUX: 'auto aarch64 ppc64le'
+          CIBW_ARCHS_LINUX: 'auto aarch64'
           CIBW_ARCHS_MACOS: 'auto arm64'
           CIBW_TEST_REQUIRES: 'pytest numpy==1.19.5'
           CIBW_TEST_COMMAND: 'pytest {project}'
