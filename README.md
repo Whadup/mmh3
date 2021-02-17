@@ -15,7 +15,7 @@ mmh3 3.0.0 supports Python 3.6, 3.7, 3.8, and 3.9. Python wheels are available f
 ## How to use
 Install:
 ```shell
-pip install mmh3 # use pip3 for macOS
+pip install mmh3 # for macOS, use "pip3 install mmh3"
 ```
 
 Quickstart:
