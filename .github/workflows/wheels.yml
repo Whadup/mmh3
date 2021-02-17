@@ -21,7 +21,7 @@ jobs:
         if: runner.os == 'Linux'
         uses: docker/setup-qemu-action@v1
         with:
-          platforms: arm64
+          platforms: [amd64, arm64]
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.9.0
         with:
