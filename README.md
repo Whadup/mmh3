@@ -14,8 +14,8 @@ mmh3 3.0.0 supports Python 3.6 and higher. [Manylinux wheels are available](http
 
 ## How to use
 Install:
-```bash
-pip3 install mmh3
+```shell
+pip install mmh3 # use pip3 for macOS
 ```
 
 Quickstart:
@@ -41,7 +41,13 @@ Other functions:
 -124315475380607080215185174712879655950
 >>> mmh3.hash_bytes("foo") # 128 bit value as bytes
 'aE\xf5\x01W\x86q\xe2\x87}\xba+\xe4\x87\xaf~'
+>>> import numpy as np
+>>> a = np.zeros(2 ** 32, dtype=np.int8)
+>>> mmh3.hash_bytes(a)
+b'V\x8f}\xad\x8eNM\xa84\x07FU\x9c\xc4\xcc\x8e'
 ```
+
+Beware that `hash64` returns **two** values, because it uses the 128-bit version of MurmurHash3 as its backend.
 
 `hash64`, `hash128`, and `hash_bytes` have the third argument for architecture optimization. Use True for x64 and False for x86 (default: True).:
 
@@ -50,42 +56,13 @@ Other functions:
 (-840311307571801102, -6739155424061121879)
 ```
 
-Version 2.5 added `hash_from_buffer`, which hashes byte-likes without memory copying. The method is suitable when you hash a large memory-view such as `numpy.ndarray`.
+`hash_from_buffer` hashes byte-likes without memory copying. The method is suitable when you hash a large memory-view such as `numpy.ndarray`.
 
 ```shell
 >>> mmh3.hash_from_buffer(numpy.random.rand(100))
 -2137204694
 >>> mmh3.hash_from_buffer(numpy.random.rand(100), signed=False)
 3812874078
-```
-
-Beware that `hash64` returns **two** values, because it uses the 128-bit version of MurmurHash3 as its backend.
-
-Version 2.4 added support for 64-bit data.
-
-```shell
->>> import numpy as np
->>> a = np.zeros(2 ** 32, dtype=np.int8)
->>> mmh3.hash_bytes(a)
-b'V\x8f}\xad\x8eNM\xa84\x07FU\x9c\xc4\xcc\x8e'
-```
-
-Version 2.4 also changed the type of seeds from signed 32-bit int to unsigned 32-bit int. (**The resulting values with signed seeds still remain the same as before, as long as they are 32-bit**)
-
-```shell
->>> mmh3.hash("aaaa", -1756908916) # signed rep. for 0x9747b28c
-1519878282
->>> mmh3.hash("aaaa", 2538058380) # unsigned rep. for 0x9747b28c
-1519878282
-```
-
-Be careful so that these seeds do not exceed 32-bit. Unexpected results may happen with invalid values.
-
-```shell
->>> mmh3.hash("foo", 2 ** 33)
--156908512
->>> mmh3.hash("foo", 2 ** 34)
--156908512
 ```
 
 ## Changelog
@@ -150,6 +127,25 @@ The results of hash64 and hash_bytes remain unchanged. Austin Appleby, the autho
 By default, mmh3 returns **signed** values for 32-bit and 64-bit versions and **unsigned** values for `hash128`, due to historical reasons. Please use the keyword argument `signed` to obtain a desired result.
 
 For compatibility with Google Guava (Java), see <https://stackoverflow.com/questions/29932956/murmur3-hash-different-result-between-python-and-java-implementation>
+
+### Unexpected results when given non 32-bit seeds
+Version 2.4 changed the type of seeds from signed 32-bit int to unsigned 32-bit int. (**The resulting values with signed seeds still remain the same as before, as long as they are 32-bit**)
+
+```shell
+>>> mmh3.hash("aaaa", -1756908916) # signed rep. for 0x9747b28c
+1519878282
+>>> mmh3.hash("aaaa", 2538058380) # unsigned rep. for 0x9747b28c
+1519878282
+```
+
+Be careful so that these seeds do not exceed 32-bit. Unexpected results may happen with invalid values.
+
+```shell
+>>> mmh3.hash("foo", 2 ** 33)
+-156908512
+>>> mmh3.hash("foo", 2 ** 34)
+-156908512
+```
 
 ## Authors
 MurmurHash3 was originally developed by Austin Appleby and distributed under public domain.
