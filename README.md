@@ -8,9 +8,9 @@
 [![Recent Downloads](https://pepy.tech/badge/mmh3/month)](https://pepy.tech/project/mmh3)
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mmh3.svg?style=flat-square&logo=conda-forge&logoColor=white)](https://anaconda.org/conda-forge/mmh3)
 
-Python wrapper for MurmurHash (MurmurHash3), a set of fast and robust non-cryptographic hash functions.
+Python wrapper for [MurmurHash (MurmurHash3)](https://en.wikipedia.org/wiki/MurmurHash), a set of fast and robust non-cryptographic hash functions.
 
-mmh3 3.0.0 supports Python 3.6 and higher. [Manylinux wheels are available](https://pypi.org/project/mmh3/2.6.0/#files) for the same policy/platform combinations as those [NumPy 1.19.5 provide](https://pypi.org/project/numpy/1.19.5/#files).
+mmh3 3.0.0 supports Python 3.6 and higher. [Wheels are available](https://pypi.org/project/mmh3/3.0.0/#files) for manylinux (x86_64 and aarch64), win32, win_amd64, and macOS (x86_64).
 
 ## How to use
 Install:
@@ -23,9 +23,9 @@ Quickstart:
 >>> import mmh3
 >>> mmh3.hash("foo") # 32 bit signed int
 -156908512
->>> mmh3.hash("foo", 42) # uses 42 for its seed
+>>> mmh3.hash("foo", 42) # uses 42 as a seed
 -1322301282
->>> mmh3.hash("foo", signed=False) # 32 bit unsigned int (since Version 2.5)
+>>> mmh3.hash("foo", signed=False) # returns 32 bit unsigned int
 4138058784
 ```
 
@@ -132,9 +132,9 @@ For compatibility with Google Guava (Java), see <https://stackoverflow.com/quest
 Version 2.4 changed the type of seeds from signed 32-bit int to unsigned 32-bit int. (**The resulting values with signed seeds still remain the same as before, as long as they are 32-bit**)
 
 ```shell
->>> mmh3.hash("aaaa", -1756908916) # signed rep. for 0x9747b28c
+>>> mmh3.hash("aaaa", -1756908916) # signed representation for 0x9747b28c
 1519878282
->>> mmh3.hash("aaaa", 2538058380) # unsigned rep. for 0x9747b28c
+>>> mmh3.hash("aaaa", 2538058380) # unsigned representation for 0x9747b28c
 1519878282
 ```
 
