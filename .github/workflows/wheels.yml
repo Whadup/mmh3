@@ -27,7 +27,7 @@ jobs:
         with:
           output-dir: wheelhouse
         env:
-          CIBW_BUILD: {cp36,cp39}-{manylinux1_x86_64,manylinux10_x86_64,manylinux2014_aarch64,win32,win_amd64,macosx_x86_64} cp39-macosx_arm64
+          CIBW_BUILD: '{cp36,cp39}-{manylinux1_x86_64,manylinux10_x86_64,manylinux2014_aarch64,win32,win_amd64,macosx_x86_64} cp39-macosx_arm64'
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_MACOS: auto arm64
           CIBW_TEST_REQUIRES: pytest numpy==1.19.5
