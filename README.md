@@ -150,7 +150,7 @@ Be careful so that these seeds do not exceed 32-bit. Unexpected results may happ
 ## Authors
 MurmurHash3 was originally developed by Austin Appleby and distributed under public domain.
 
-* <http://code.google.com/p/smhasher/>
+* <https://github.com/aappleby/smhasher>
 
 Ported and modified for Python by Hajime Senuma.
 
