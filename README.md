@@ -68,6 +68,7 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 ## Changelog
 ### 3.0.0 (2021-02-17)
 * Python wheels are now available!
+  * Supported platforms are manylinux1_x86_64, manylinux2010_x86_64, manylinux2014_aarch64, win32, win_amd64, and macosx_10_9_x86_64.
 * Add support for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
 * Drop support for Python 2.7, 3.3, 3.4, and 3.5.
 * Add support for Python 3.7, 3.8, and 3.9.
