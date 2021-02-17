@@ -1,4 +1,6 @@
-name: build
+# This workflow is intended for quick building tests.
+# Use python-publish.yml for complete building/uploading tests.
+name: Build and Test
 
 on:
   push:

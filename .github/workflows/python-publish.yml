@@ -1,4 +1,4 @@
-name: Upload Python Package
+name: Build Python Wheels and Upload Python Package
 
 on:
   push:
@@ -12,11 +12,35 @@ on:
         default: 'testpypi'
 
 jobs:
-  deploy:
+  deploy-windows:
     strategy:
       matrix:
-        os: [macos-10.15, windows-2019]
-    runs-on: ${{ matrix.os }}
+        python-version: [3.6, 3.7, 3.8, 3.9]
+        architecture: [x64, x86]
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: ${{ matrix.architecture }}
+    - name: Install dependencies
+      run: |
+        pip install pytest
+        pip install numpy
+        pip install .
+    - name: Test with pytest
+      run: python -m pytest
+    - name: Build wheels
+      run: |
+        pip install wheel
+        python setup.py bdist_wheel
+  deploy-macos:
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+    runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
