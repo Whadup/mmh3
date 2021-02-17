@@ -12,7 +12,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04, windows-2019, macOS-10.15]
-
+    env:
+      CIBW_BUILD: [cp38-manylinux1_x86_64, cp38-macosx_x86_64, cp38-win32]
     steps:
       - uses: actions/checkout@v2
 
