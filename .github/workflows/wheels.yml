@@ -31,8 +31,8 @@ jobs:
     #      CIBW_BUILD: '{cp36,cp37,cp38,cp39}-{manylinux1_x86_64,manylinux10_x86_64,manylinux2014_aarch64,win32,win_amd64,macosx_x86_64} cp39-macosx_arm64'
           CIBW_ARCHS_LINUX: 'x86_64 aarch64'
           CIBW_ARCHS_MACOS: 'x86_64 arm64'
-          CIBW_TEST_REQUIRES: 'pytest numpy==1.19.5'
-          CIBW_TEST_COMMAND: pytest
+#          CIBW_TEST_REQUIRES: 'pytest numpy==1.19.5'
+#          CIBW_TEST_COMMAND: pytest
       - uses: actions/upload-artifact@v2
         with:
           path: ./wheelhouse/*.whl
