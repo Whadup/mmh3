@@ -10,7 +10,7 @@
 
 Python wrapper for [MurmurHash (MurmurHash3)](https://en.wikipedia.org/wiki/MurmurHash), a set of fast and robust non-cryptographic hash functions.
 
-mmh3 3.0.0 supports Python 3.6, 3.7, 3.8, and 3.9. Python wheels are available for these versions.
+mmh3 3.0.0 supports Python 3.6, 3.7, 3.8, and 3.9. [Python wheels are available](https://pypi.org/project/mmh3/#files) for these versions.
 
 ## How to use
 Install:
