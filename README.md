@@ -68,8 +68,8 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 ## Changelog
 ### 3.0.0 (2021-02-17)
 * Python wheels are now available!
-  * Supported platforms are manylinux1_x86_64, manylinux2010_x86_64, manylinux2014_aarch64, win32, win_amd64, and macosx_10_9_x86_64.
-  * A wheel for macosx_11_0_arm64 (Apple M1) is planned to be available in the near future, hopefully without version increase.
+  * Supported platforms are `manylinux1_x86_64`, `manylinux2010_x86_64`, `manylinux2014_aarch64`, `win32`, `win_amd64`, and `macosx_10_9_x86_64`.
+  * A wheel for `macosx_11_0_arm64` (Apple M1) is planned to be available in the near future, hopefully without version increase.
 * Add support for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
 * Drop support for Python 2.7, 3.3, 3.4, and 3.5.
 * Add support for Python 3.7, 3.8, and 3.9.
@@ -105,7 +105,6 @@ The first two commits are from [Derek Wilson](https://github.com/underrun). Than
 * Improve portability to support systems with old gcc (version < 4.4) such as CentOS/RHEL 5.x. (Commit from [Micha Gorelick](https://github.com/mynameisfiber). Thanks!)
 
 ### 2.1 (2013-02-25)
-
 * Add `__version__` constant. Check if it exists when the following revision matters for your application.
 * Incorporate the revision r147, which includes robustness improvement and minor tweaks.
 
@@ -121,7 +120,6 @@ Beware that due to this revision, **the result of 32-bit version of 2.1 is NOT t
 The results of hash64 and hash_bytes remain unchanged. Austin Appleby, the author of Murmurhash, ensured this revision was the final modification to MurmurHash3's results and any future changes would be to improve performance only.
 
 ## License
-
 [CC0-1.0](./LICENSE).
 
 ## Known Issues
