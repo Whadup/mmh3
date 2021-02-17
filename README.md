@@ -49,13 +49,6 @@ b'V\x8f}\xad\x8eNM\xa84\x07FU\x9c\xc4\xcc\x8e'
 
 Beware that `hash64` returns **two** values, because it uses the 128-bit version of MurmurHash3 as its backend.
 
-`hash64`, `hash128`, and `hash_bytes` have the third argument for architecture optimization. Use True for x64 and False for x86 (default: True).:
-
-```shell
->>> mmh3.hash64("foo", 42, True) 
-(-840311307571801102, -6739155424061121879)
-```
-
 `hash_from_buffer` hashes byte-likes without memory copying. The method is suitable when you hash a large memory-view such as `numpy.ndarray`.
 
 ```shell
@@ -63,6 +56,13 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 -2137204694
 >>> mmh3.hash_from_buffer(numpy.random.rand(100), signed=False)
 3812874078
+```
+
+`hash64`, `hash128`, and `hash_bytes` have the third argument for architecture optimization. Use True for x64 and False for x86 (default: True).:
+
+```shell
+>>> mmh3.hash64("foo", 42, True) 
+(-840311307571801102, -6739155424061121879)
 ```
 
 ## Changelog
