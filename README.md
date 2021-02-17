@@ -10,7 +10,7 @@
 
 Python wrapper for [MurmurHash (MurmurHash3)](https://en.wikipedia.org/wiki/MurmurHash), a set of fast and robust non-cryptographic hash functions.
 
-mmh3 3.0.0 supports Python 3.6 and higher. [Wheels are available](https://pypi.org/project/mmh3/3.0.0/#files) for manylinux (x86_64 and aarch64), win32, win_amd64, and macOS (x86_64).
+mmh3 3.0.0 supports Python 3.6, 3.7, 3.8, and 3.9. Python wheels are available for these versions.
 
 ## How to use
 Install:
@@ -21,11 +21,11 @@ pip install mmh3 # use pip3 for macOS
 Quickstart:
 ```shell
 >>> import mmh3
->>> mmh3.hash("foo") # 32 bit signed int
+>>> mmh3.hash("foo") # returns a 32-bit signed int
 -156908512
 >>> mmh3.hash("foo", 42) # uses 42 as a seed
 -1322301282
->>> mmh3.hash("foo", signed=False) # returns 32 bit unsigned int
+>>> mmh3.hash("foo", signed=False) # returns a 32-bit unsigned int
 4138058784
 ```
 
@@ -69,6 +69,7 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 ### 3.0.0 (2021-02-17)
 * Python wheels are now available!
   * Supported platforms are manylinux1_x86_64, manylinux2010_x86_64, manylinux2014_aarch64, win32, win_amd64, and macosx_10_9_x86_64.
+  * A wheel for macosx_11_0_arm64 (Apple M1) is planned to be available in the near future, hopefully without version increase.
 * Add support for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
 * Drop support for Python 2.7, 3.3, 3.4, and 3.5.
 * Add support for Python 3.7, 3.8, and 3.9.
