@@ -56,7 +56,7 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 3812874078
 ```
 
-`hash64`, `hash128`, and `hash_bytes` have the third argument for architecture optimization. Use True for x64 and False for x86 (default: True).:
+`hash64`, `hash128`, and `hash_bytes` have the third argument for architecture optimization. Use True for x64 and False for x86 (default: True):
 
 ```shell
 >>> mmh3.hash64("foo", 42, True) 
