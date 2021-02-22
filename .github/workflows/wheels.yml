@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - feature/wheel
+  workflow_dispatch:
+    inputs:
+      repository: 
+        description: 'The repository to upload the package to'
+        required: true
+        default: 'testpypi'
 
 jobs:
   build_wheels:
@@ -11,13 +17,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-#        os: [ubuntu-20.04, windows-2019, macOS-10.15]
-        os: [ubuntu-20.04]
+        os: [ubuntu-20.04, windows-2019, macOS-10.15]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
       - name: Set up QEMU
         if: runner.os == 'Linux'
         uses: docker/setup-qemu-action@v1.0.1
@@ -38,3 +45,41 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           path: ./wheelhouse/*.whl
+  build_sdist:
+    name: Build a source distribution
+    runs-on: ubuntu-20.04
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Build sdist
+        run: python setup.py build sdist
+      - uses: actions/upload-artifact@v2
+        with:
+          path: dist/*.tar.gz
+  publish:
+    name: 'Upload to PyPI/Test PyPI'
+    needs: [build_wheels, build_sdist]
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+        python-version: '3.9'
+      - name: Set up built items
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+      - name: Publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload  --repository testpypi dist/*
