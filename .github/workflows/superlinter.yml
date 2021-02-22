@@ -2,9 +2,7 @@ name: Super-Linter
 
 on:
   push:
-    branches:
-      - master
-      - feature/wheel
+    branches: '**'
   pull_request:
     types:
       - opened
