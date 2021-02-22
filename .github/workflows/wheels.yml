@@ -62,6 +62,7 @@ jobs:
           path: dist/*.tar.gz
   publish:
     name: 'Upload to PyPI/Test PyPI'
+    runs-on: ubuntu-20.04
     needs: [build_wheels, build_sdist]
     steps:
       - name: Set up Python
