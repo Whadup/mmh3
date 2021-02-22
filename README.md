@@ -8,9 +8,7 @@
 [![Recent Downloads](https://pepy.tech/badge/mmh3/month)](https://pepy.tech/project/mmh3)
 [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mmh3.svg?style=flat-square&logo=conda-forge&logoColor=white)](https://anaconda.org/conda-forge/mmh3)
 
-Python wrapper for [MurmurHash (MurmurHash3)](https://en.wikipedia.org/wiki/MurmurHash), a set of fast and robust non-cryptographic hash functions.
-
-mmh3 3.0.0 supports Python 3.6, 3.7, 3.8, and 3.9. [Python wheels are available](https://pypi.org/project/mmh3/#files) for these versions.
+mmh3 is a Python wrapper for [MurmurHash (MurmurHash3)](https://en.wikipedia.org/wiki/MurmurHash), a set of fast and robust non-cryptographic hash functions.
 
 ## How to use
 Install:
@@ -66,10 +64,9 @@ Beware that `hash64` returns **two** values, because it uses the 128-bit version
 ```
 
 ## Changelog
-### 3.0.0 (2021-02-17)
-* Python wheels are now available!
-  * Supported platforms are `manylinux1_x86_64`, `manylinux2010_x86_64`, `manylinux2014_aarch64`, `win32`, `win_amd64`, and `macosx_10_9_x86_64`.
-  * A wheel for `macosx_11_0_arm64` (Apple M1) is planned to be available in the near future, hopefully without version increase.
+### 3.0.0 (2021-02-22)
+* Python wheels are now available, thanks to the power of [cibuildwheel](https://github.com/joerick/cibuildwheel).
+  * Supported platforms are `manylinux1_x86_64`, `manylinux2010_x86_64`, `manylinux2014_aarch64`, `win32`, `win_amd64`, `macosx_10_9_x86_64`, and `macosx_11_0_arm64` (Apple Silicon).
 * Add support for newer macOS environments. Thanks [Matthew Honnibal](https://github.com/honnibal)!
 * Drop support for Python 2.7, 3.3, 3.4, and 3.5.
 * Add support for Python 3.7, 3.8, and 3.9.
