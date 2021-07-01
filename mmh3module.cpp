@@ -9,9 +9,13 @@
 #define PY_SSIZE_T_CLEAN
 #endif
 
+#include <Python.h>
 #include <stdio.h>
 #include <string.h>
-#include <Python.h>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <stdexcept>
 #include "MurmurHash3.h"
 
 #if defined(_MSC_VER)
@@ -25,6 +29,73 @@ typedef unsigned __int64 uint64_t;
 #else    // defined(_MSC_VER)
 #include <stdint.h>
 #endif // !defined(_MSC_VER)
+
+PyObject* convertVector(const std::vector<long> &data) {
+  PyObject* listObj = PyList_New( data.size() );
+  if (!listObj) throw std::logic_error("Unable to allocate memory for Python list");
+  for (unsigned int i = 0; i < data.size(); i++) {
+    PyObject *num = PyLong_FromLong((long) data[i]);
+    if (!num) {
+      Py_DECREF(listObj);
+      throw std::logic_error("Unable to allocate memory for Python list");
+    }
+    PyList_SET_ITEM(listObj, i, num);
+  }
+  return listObj;
+}
+
+
+static PyObject* tokenize(PyObject *self, PyObject *args, PyObject *keywds)
+{
+    const char *target_str;
+    Py_ssize_t target_str_len;
+    uint32_t seed = 0;
+    int is_signed = 1;
+    
+    static char *kwlist[] = {(char *)"key", (char *)"seed",
+      (char *)"signed", NULL};
+      
+#ifndef _MSC_VER
+  static uint64_t mask[] = {0x0ffffffff, 0xffffffffffffffff};
+#endif
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "s#|IB", kwlist,
+        &target_str, &target_str_len, &seed, &is_signed)) {
+        return NULL;
+    }
+    std::vector<long> tokens;
+    int32_t token[1];
+    long long_token = 0;
+    std::string word;
+
+    for(unsigned int i=0; i < target_str_len; i++)
+    {
+      //do something
+      char c = target_str[i];
+      if (c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\v' || c == '\f' || c == '\0') 
+      {
+        if (word.empty()) {
+          continue;
+        } 
+        else {
+          const char* cword = word.c_str();
+//          std::cout << cword << std::endl;
+          MurmurHash3_x86_32(cword, word.length(), seed, token);
+          long_token = token[0] & mask[is_signed];
+          tokens.push_back(long_token);
+          word.clear();
+        }
+      }
+      else
+        word.push_back(c);
+    }
+    //remainder
+    const char* cword = word.c_str();
+    MurmurHash3_x86_32(cword, word.length(), seed, token);
+    long_token = token[0] & mask[is_signed];
+    tokens.push_back(long_token);
+    return convertVector(tokens);
+}
 
 static PyObject *
 mmh3_hash(PyObject *self, PyObject *args, PyObject *keywds)
@@ -207,6 +278,8 @@ static struct module_state _state;
 #endif
 
 static PyMethodDef Mmh3Methods[] = {
+    {"tokenize", (PyCFunction)tokenize, METH_VARARGS | METH_KEYWORDS,
+        "tokenize(text[, seed=0, signed=True]) -> hash value\n Return a 32 bit integer."},
     {"hash", (PyCFunction)mmh3_hash, METH_VARARGS | METH_KEYWORDS,
         "hash(key[, seed=0, signed=True]) -> hash value\n Return a 32 bit integer."},
     {"hash_from_buffer", (PyCFunction)mmh3_hash_from_buffer, METH_VARARGS | METH_KEYWORDS,
